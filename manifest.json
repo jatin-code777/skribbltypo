@@ -1,5 +1,5 @@
 {
-  "manifest_version": 2,
+  "manifest_version": 3,
   "name": "Skribbl Typo",
   "description": "The most complete toolbox for skribbl.io with namefinder & Discord integration",
   "version": "24.2.12",
@@ -23,13 +23,22 @@
     "default_popup": "popup/popup.html"
   },
   "web_accessible_resources": [
-    "gamePatch.js",
-    "res/*",
-    "gifCap/*",
-    "features/*"
+    {
+      "resources": [
+        "gamePatch.js",
+        "res/*",
+        "gifCap/*",
+        "features/*"
+      ],
+      "matches": [
+        "*://skribbl.io/*"
+      ]
+    }
   ],
   "permissions": [
-    "activeTab",
+    "activeTab"
+  ],
+  "hostPermissions": [
     "*://tobeh.host/*",
     "*://typo.rip/*",
     "*://allorigins.win/*",
@@ -39,7 +48,6 @@
     {
       "run_at": "document_idle",
       "matches": [
-        "*://skribbl.io/",
         "*://skribbl.io/*"
       ],
       "js": [
@@ -60,7 +68,6 @@
     {
       "run_at": "document_start",
       "matches": [
-        "*://skribbl.io/",
         "*://skribbl.io/*"
       ],
       "js": [
@@ -80,15 +87,6 @@
       "css": [
         "features/style.css",
         "picker/colr_pickr.min.css"
-      ]
-    },
-    {
-      "matches": [
-        "*://sketchful.io/",
-        "*://sketchful.io/*"
-      ],
-      "js": [
-        "features/sketchfulReport.js"
       ]
     }
   ]

@@ -339,7 +339,7 @@ const hints = [
     "Want to share a chat snippet on Discord?<br>Select the messages and click 'Copy chat selection for Discord' to create a nicely formatted chat history.",
     "In practise, you can also paste .png to the skribbl canvas! To do so, click 'Paste Image' in Image Tools.",
     "To draw without time limit, click the avatar on the landing page!",
-    "Want to kick someone without grapping your mouse? Type 'kick--' to kick the current drawer or 'kick [id]--' to kick a player by their id! View IDs by pressing AltGr.",
+    "Want to kick someone without grabbing your mouse? Type 'kick--' to kick the current drawer or 'kick [id]--' to kick a player by their id! View IDs by pressing AltGr.",
     "Enable Typo-Pressure in the settings popup to draw in a beautiful full-size-range!",
     "Use the keys 1-5 to quickly set your brush size.",
     "Enable Typo-Pressure in the settings popup to draw in a beautiful full-size-range!.",

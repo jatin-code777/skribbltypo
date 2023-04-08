@@ -530,6 +530,8 @@ const commands = [
 
 ];
 
+let simpleCommands = [];
+
 const performCommand = (command) => {
     // get raw command
     command = command.replace("--", "").trim();

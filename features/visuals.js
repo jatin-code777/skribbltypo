@@ -280,7 +280,7 @@ const visuals = {
                     <div><b>${t.name}</b> by ${t.author}</div>
                     <div>${t.downloads} Downloads</div>
                     <button ${added ? "disabled" : ""} class="flatUI green min air downloadTheme">${!added ? "Download" : "Added"} </button>
-                    <div>v${t.version}</div>
+                    <div style="opacity: 0.5">v${t.version}</div>
                 </div>
                 `);
                 container.appendChild(entry);
@@ -508,6 +508,10 @@ const visuals = {
             </div>
             
             <div class="create">
+
+                <div>
+                    Use this page to create a new theme. <br>You can quickly create a color theme with the three color pickers, or fine-tune it in the sections below.<br>Dont forget to save it when you're done!
+                </div>
                 
                 <div class="themeName" style="display: grid; grid-template-columns: 1fr 3fr 2fr 1fr; align-items: center; gap: 1em;">
                     <label style="font-weight: bold" for="themeName">Theme Name:</label>
@@ -662,6 +666,11 @@ const visuals = {
             </div>
             
             <div class="add">
+
+                <div>
+                    Scroll through verified themes or add the theme of a friend. <br>To get a share ID, your friend has to click "Share" in the "Manage" menu of the theme.
+                </div>
+                <br>
 
                 <div class="themeUrlImport" style="display: grid; grid-template-columns: 1fr 3fr 1fr; align-items: center; gap: 1em;">
                     <label style="font-weight: bold" for="themeShareLink">Theme Share ID:</label>
