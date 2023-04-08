@@ -5,7 +5,7 @@
 // @author tobeh#7437
 // @description Userscript version of skribbltypo - the most advanced toolbox for skribbl.io
 // @icon64 https://rawcdn.githack.com/toobeeh/skribbltypo/d416e4f61888b48a9650e74cf716559904e2fcbf/res/icon/128MaxFit.png
-// @version 24.2.11.168089816
+// @version 24.2.12.168096048
 // @updateURL https://raw.githubusercontent.com/toobeeh/skribbltypo/master/skribbltypo.userscript.js
 // @grant none
 // @match https://skribbl.io/*
@@ -24,7 +24,7 @@ const chrome = {
             return "https://rawcdn.githack.com/toobeeh/skribbltypo/d416e4f61888b48a9650e74cf716559904e2fcbf/" + url;
         },
         getManifest: () => {
-            return {version: "24.2.11 usrsc"};
+            return {version: "24.2.12 usrsc"};
         },
         onMessage: {
             addListener: (callback) => {
@@ -1245,7 +1245,7 @@ const hints = [
     "Want to share a chat snippet on Discord?<br>Select the messages and click 'Copy chat selection for Discord' to create a nicely formatted chat history.",
     "In practise, you can also paste .png to the skribbl canvas! To do so, click 'Paste Image' in Image Tools.",
     "To draw without time limit, click the avatar on the landing page!",
-    "Want to kick someone without grapping your mouse? Type 'kick--' to kick the current drawer or 'kick [id]--' to kick a player by their id! View IDs by pressing AltGr.",
+    "Want to kick someone without grabbing your mouse? Type 'kick--' to kick the current drawer or 'kick [id]--' to kick a player by their id! View IDs by pressing AltGr.",
     "Enable Typo-Pressure in the settings popup to draw in a beautiful full-size-range!",
     "Use the keys 1-5 to quickly set your brush size.",
     "Enable Typo-Pressure in the settings popup to draw in a beautiful full-size-range!.",
@@ -1685,7 +1685,7 @@ const visuals = {
                     <div><b>${t.name}</b> by ${t.author}</div>
                     <div>${t.downloads} Downloads</div>
                     <button ${added ? "disabled" : ""} class="flatUI green min air downloadTheme">${!added ? "Download" : "Added"} </button>
-                    <div>v${t.version}</div>
+                    <div style="opacity: 0.5">v${t.version}</div>
                 </div>
                 `);
                 container.appendChild(entry);
@@ -1913,6 +1913,10 @@ const visuals = {
             </div>
             
             <div class="create">
+
+                <div>
+                    Use this page to create a new theme. <br>You can quickly create a color theme with the three color pickers, or fine-tune it in the sections below.<br>Dont forget to save it when you're done!
+                </div>
                 
                 <div class="themeName" style="display: grid; grid-template-columns: 1fr 3fr 2fr 1fr; align-items: center; gap: 1em;">
                     <label style="font-weight: bold" for="themeName">Theme Name:</label>
@@ -2067,6 +2071,11 @@ const visuals = {
             </div>
             
             <div class="add">
+
+                <div>
+                    Scroll through verified themes or add the theme of a friend. <br>To get a share ID, your friend has to click "Share" in the "Manage" menu of the theme.
+                </div>
+                <br>
 
                 <div class="themeUrlImport" style="display: grid; grid-template-columns: 1fr 3fr 1fr; align-items: center; gap: 1em;">
                     <label style="font-weight: bold" for="themeShareLink">Theme Share ID:</label>
@@ -2609,6 +2618,22 @@ const visuals = {
         .flatUI.blue, .button-create, .button-blue, #copy-invite {
             background-color: var(--COLOR_BUTTON_NORMAL_BG) !important;
             color: var(--COLOR_BUTTON_NORMAL_TEXT) !important;
+        }
+
+        :is(.flatUi.orange, .button-orange):is(:hover, :active, :focus) {
+            background-color: var(--COLOR_BUTTON_DANGER_BG) !important;
+            color: var(--COLOR_BUTTON_DANGER_TEXT) !important;
+            opacity: 0.8;
+        }
+        :is(.flatUI.green, .button-play, #start-game):is(:hover, :active, :focus) {
+            color: var(--COLOR_BUTTON_SUBMIT_TEXT) !important;
+            background-color: var(--COLOR_BUTTON_SUBMIT_BG) !important;
+            opacity: 0.8;
+        }
+        :is(.flatUI.blue, .button-create, .button-blue, #copy-invite):is(:hover, :active, :focus) {
+            background-color: var(--COLOR_BUTTON_NORMAL_BG) !important;
+            color: var(--COLOR_BUTTON_NORMAL_TEXT) !important;
+            opacity: 0.8;
         }
 
         ${theme.misc.fontStyle != "" ? `*{font-family:'${theme.misc.fontStyle.trim().split(":")[0].replaceAll("+", " ")}', sans-serif !important}` : ""}
@@ -3461,7 +3486,7 @@ let patchNode = async (node) => {
         node.src = ""; /* to be sure */
         // insert patched script
         let script = document.createElement("script");
-        script.src = chrome.extension.getURL("gamePatch.js");
+        script.src = chrome.runtime.getURL("gamePatch.js");
         node.parentElement.appendChild(script);
         // add var to get access typo ressources in css
         document.head.appendChild(elemFromString(`<style>:root{--typobrush:url(${chrome.runtime.getURL("res/brush.gif")})}</style>`));
@@ -5922,6 +5947,8 @@ const commands = [
     }
 
 ];
+
+let simpleCommands = [];
 
 const performCommand = (command) => {
     // get raw command
